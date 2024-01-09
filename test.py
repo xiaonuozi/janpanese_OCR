@@ -1,14 +1,17 @@
 from paddleocr import PaddleOCR, draw_ocr
+import elevate
 
+# 提升权限
+elevate.elevate()
 # Paddleocr目前支持的多语言语种可以通过修改lang参数进行切换
 # 例如`ch`, `en`, `fr`, `german`, `korean`, `japan`
 ocr = PaddleOCR(use_angle_cls=True, lang="japan")  # need to run only once to download and load model into memory
-img_path = './imgs/JAP.png'
+img_path = 'C:/Users/14154/Downloads/DangoTranslator_4.5.8/DangoTranslator/app/config'
 result = ocr.ocr(img_path, cls=True)
 for idx in range(len(result)):
     res = result[idx]
     for line in res:
-        print(line)
+        print(line[1][0]+ "   Score{}",float(line[1][1]))
 
 # 显示结果
 from PIL import Image
